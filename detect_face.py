@@ -1,7 +1,8 @@
 import cv2
+import dlib
 
 
-def detect_face(detector, frame_temp, in_height=300, in_width=0):
+def detect_face(frame_temp, in_height=300, in_width=0):
     frame_height = frame_temp.shape[0]
     frame_width = frame_temp.shape[1]
     if not in_width:
@@ -13,7 +14,7 @@ def detect_face(detector, frame_temp, in_height=300, in_width=0):
     frame_small = cv2.resize(frame_temp, (in_width, in_height))
 
     frame_small = cv2.cvtColor(frame_small, cv2.COLOR_BGR2RGB)
-    face_rects = detector(frame_small, 0)
+    face_rects = dlib.get_frontal_face_detector(frame_small, 0)
 
     bounding_boxes = []
     for faceRect in face_rects:

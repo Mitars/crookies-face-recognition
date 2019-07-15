@@ -1,6 +1,5 @@
 from __future__ import division
 import cv2
-import dlib
 import time
 import datetime
 from detect_face import detect_face
@@ -8,7 +7,6 @@ from detect_face import detect_face
 if __name__ == "__main__":
     logfile = open("log.csv", "w+")
     logfile.write('time, person, bounding box, camera\n')
-    hogFaceDetector = dlib.get_frontal_face_detector()
     cap = cv2.VideoCapture(0)
     hasFrame, frame = cap.read()
 
@@ -21,7 +19,7 @@ if __name__ == "__main__":
         frame_count += 1
 
         t = time.time()
-        bboxes = detect_face(hogFaceDetector, frame)
+        bboxes = detect_face(frame)
         tt_dlibHog += time.time() - t
         fpsDlibHog = frame_count / tt_dlibHog
 
