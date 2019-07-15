@@ -20,14 +20,14 @@ if __name__ == "__main__":
 
         t = time.time()
         now = datetime.datetime.now()
-        bboxes = detect_face(frame)
+        bounding_boxes = detect_face(frame)
         time_delta += time.time() - t
         fpsCount = frame_count / time_delta
 
         label = "DLIB HoG ; ; FPS : {:.2f}".format(fpsCount)
 
-        if len(bboxes) > 0:
-            for box in bboxes:
+        if len(bounding_boxes) > 0:
+            for box in bounding_boxes:
                 logfile.write(str(now) + ', ' + 'unknown' + ', ' + str(box) + ', ' + 'Front Camera 1' + '\n')
                 if len(box):
                     cv2.rectangle(frame, (box[0], box[1]), (box[2], box[3]), (0, 255, 0), 3, 3)
