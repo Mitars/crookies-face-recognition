@@ -5,7 +5,7 @@ import time
 import datetime
 
 
-def detect_face_hog(detector, frame, inHeight=300, inWidth=0):
+def detect_face_hog(detector, frame, inHeight=200, inWidth=0):
     frameDlibHog = frame.copy()
     frameHeight = frameDlibHog.shape[0]
     frameWidth = frameDlibHog.shape[1]
@@ -19,15 +19,12 @@ def detect_face_hog(detector, frame, inHeight=300, inWidth=0):
 
     frameDlibHogSmall = cv2.cvtColor(frameDlibHogSmall, cv2.COLOR_BGR2RGB)
     faceRects = detector(frameDlibHogSmall, 0)
-    print(frameWidth, frameHeight, inWidth, inHeight)
-    bboxes = []
+    #print(frameWidth, frameHeight, inWidth, inHeight)
+    cvRect = []
     for faceRect in faceRects:
-
         cvRect = [int(faceRect.left()*scaleWidth), int(faceRect.top()*scaleHeight),
                   int(faceRect.right()*scaleWidth), int(faceRect.bottom()*scaleHeight) ]
-        bboxes.append(cvRect)
-        cv2.rectangle(frameDlibHog, (cvRect[0], cvRect[1]), (cvRect[2], cvRect[3]), (0, 255, 0), int(round(frameHeight/150)), 4)
-    return frameDlibHog, bboxes
+    return cvRect
 
 
 if __name__ == "__main__":
@@ -46,7 +43,7 @@ if __name__ == "__main__":
         frame_count += 1
 
         t = time.time()
-        outDlibHog, bboxes = detect_face_hog(hogFaceDetector, frame)
+        bboxes = detect_face_hog(hogFaceDetector, frame)
         tt_dlibHog += time.time() - t
         fpsDlibHog = frame_count / tt_dlibHog
 
@@ -54,12 +51,15 @@ if __name__ == "__main__":
 
         now = datetime.datetime.now()
 
+        if len(bboxes) > 0:
+            cv2.rectangle(frame, (bboxes[0], bboxes[1]), (bboxes[2], bboxes[3]), (0, 255, 0), 3, 3)
+
         for box in bboxes:
             logfile.write(str(now) + ', ' + 'unknown' + ', ' + str(box) + ', ' + 'Front Camera 1' + '\n')
 
-        cv2.putText(outDlibHog, label, (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.4, (0, 0, 255), 3, cv2.LINE_AA)
+        cv2.putText(frame, label, (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.4, (0, 0, 255), 3, cv2.LINE_AA)
 
-        cv2.imshow("Face Detection Comparison", outDlibHog)
+        cv2.imshow("Face Detection Comparison", frame)
 
         if frame_count == 1:
             tt_dlibHog = 0
