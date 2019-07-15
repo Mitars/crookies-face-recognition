@@ -6,7 +6,7 @@ from detect_face import detect_face
 
 if __name__ == "__main__":
     logfile = open("log.csv", "w+")
-    logfile.write('time, person, bounding box, camera\n')
+    logfile.write('time, person, bounding box, detection_score, camera\n')
     cap = cv2.VideoCapture(0)
     hasFrame, frame = cap.read()
 
@@ -20,17 +20,18 @@ if __name__ == "__main__":
 
         t = time.time()
         now = datetime.datetime.now()
-        bounding_boxes = detect_face(frame)
+        bounding_boxes, scores = detect_face(frame)
         time_delta += time.time() - t
         fpsCount = frame_count / time_delta
 
         label = "DLIB HoG ; ; FPS : {:.2f}".format(fpsCount)
 
-        if len(bounding_boxes) > 0:
-            for box in bounding_boxes:
-                logfile.write(str(now) + ', ' + 'unknown' + ', ' + str(box) + ', ' + 'Front Camera 1' + '\n')
-                if len(box):
-                    cv2.rectangle(frame, (box[0], box[1]), (box[2], box[3]), (0, 255, 0), 3, 3)
+        for i in range(len(bounding_boxes)):
+            box = bounding_boxes[i]
+            logfile.write(str(now) + ', ' + 'unknown' + ', ' + str(box) + ', ' + str(scores[i]) + ', ' + 'Front Camera 1' + '\n')
+            cv2.rectangle(frame, (box[0], box[1]), (box[2], box[3]), (0, 255, 0), 3, 3)
+            cv2.putText(frame, str("%.2f" % scores[i]), (box[0], box[1]), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 1, cv2.LINE_AA)
+            #print(scores[0])
 
         cv2.putText(frame, label, (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.4, (0, 0, 255), 3, cv2.LINE_AA)
 
