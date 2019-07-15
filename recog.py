@@ -15,6 +15,8 @@ if __name__ == "__main__":
     frame_count = 0
     time_delta = 0
 
+    lastPeopleCount = 0
+
     makeScreenShot = True
 
     if not os.path.exists(imagesFolderPath):
@@ -35,8 +37,12 @@ if __name__ == "__main__":
         label = "DLIB HoG ; ; FPS : {:.2f}".format(fpsCount)
 
         if bounding_boxes:
+            if len(bounding_boxes) != lastPeopleCount:
+                makeScreenShot = True
+            lastPeopleCount = len(bounding_boxes)
             for i in range(len(bounding_boxes)):
                 box = bounding_boxes[i]
+
 
                 if scores:
                     score = scores[i]
