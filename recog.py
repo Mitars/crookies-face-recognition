@@ -3,31 +3,7 @@ import cv2
 import dlib
 import time
 import datetime
-
-
-def detect_face_hog(detector, frame, inHeight=300, inWidth=0):
-    frameDlibHog = frame.copy()
-    frameHeight = frameDlibHog.shape[0]
-    frameWidth = frameDlibHog.shape[1]
-    if not inWidth:
-        inWidth = int((frameWidth / frameHeight)*inHeight)
-
-    scaleHeight = frameHeight / inHeight
-    scaleWidth = frameWidth / inWidth
-
-    frameDlibHogSmall = cv2.resize(frameDlibHog, (inWidth, inHeight))
-
-    frameDlibHogSmall = cv2.cvtColor(frameDlibHogSmall, cv2.COLOR_BGR2RGB)
-    faceRects = detector(frameDlibHogSmall, 0)
-    #print(frameWidth, frameHeight, inWidth, inHeight)
-
-    bboxes = []
-    for faceRect in faceRects:
-        cvRect = [int(faceRect.left()*scaleWidth), int(faceRect.top()*scaleHeight),
-                  int(faceRect.right()*scaleWidth), int(faceRect.bottom()*scaleHeight)]
-        bboxes.append(cvRect)
-    return bboxes
-
+from detect_face import detect_face
 
 if __name__ == "__main__":
     logfile = open("log.csv", "w+")
@@ -45,7 +21,7 @@ if __name__ == "__main__":
         frame_count += 1
 
         t = time.time()
-        bboxes = detect_face_hog(hogFaceDetector, frame)
+        bboxes = detect_face(hogFaceDetector, frame)
         tt_dlibHog += time.time() - t
         fpsDlibHog = frame_count / tt_dlibHog
 
