@@ -15,9 +15,11 @@ if __name__ == "__main__":
     frame_count = 0
     time_delta = 0
 
+    bestScore = 0
     lastPeopleCount = 0
 
-    makeScreenShot = True
+    newSession = True
+    timeStemp = ''
 
     if not os.path.exists(imagesFolderPath):
         os.mkdir(imagesFolderPath)
@@ -36,33 +38,45 @@ if __name__ == "__main__":
 
         label = "DLIB HoG ; ; FPS : {:.2f}".format(fpsCount)
 
+
         if bounding_boxes:
+
             if len(bounding_boxes) != lastPeopleCount:
-                makeScreenShot = True
+                newSession = True
             lastPeopleCount = len(bounding_boxes)
             for i in range(len(bounding_boxes)):
                 box = bounding_boxes[i]
-
 
                 if scores:
                     score = scores[i]
                 else:
                     score = None
 
-                if makeScreenShot:
-                    screenShotFileName = '%s.jpg' % (str(now).replace(':', '_'))
-                    cv2.imwrite("%s/%s.jpg" % (imagesFolderPath, screenShotFileName), frame)
-                    makeScreenShot = False
+                if newSession:
+                    timeStemp = str(now).replace(':', '_')
+                    cv2.imwrite("%s/%s_someoneNew.jpg" % (imagesFolderPath, timeStemp), frame)
                     logfile.write(str(now) + '\t' + 'unknown' + '\t' + str(
-                        box) + '\t' + str(score) + '\t' + 'Front Camera 1' + '\t' + screenShotFileName + '\n')
+                        box) + '\t' + str(score) + '\t' + 'Front Camera 1' + '\t' + timeStemp + '\n')
+                    newSession = False
+                    bestScore = score
                 else:
                     logfile.write(str(now) + '\t' + 'unknown' + '\t' + str(box) + '\t' + str(score) + '\t' + 'Front Camera 1' + '\n')
+                    if score > bestScore:
+                        screenShotFileName = timeStemp
+                        cv2.imwrite("%s/%s_best.jpg" % (imagesFolderPath, timeStemp), frame)
+                        bestScore = score
                 cv2.rectangle(frame, (box[0], box[1]), (box[2], box[3]), (0, 255, 0), 3, 3)
+
 
                 if score:
                     cv2.putText(frame, str("%.2f" % score), (box[0], box[1]), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 1, cv2.LINE_AA)
         else:
-            makeScreenShot = True
+            if not newSession:
+                timeStemp = str(now).replace(':', '_')
+                cv2.imwrite("%s/%s_noOne.jpg" % (imagesFolderPath, screenShotFileName), frame)
+                logfile.write(str(now) + '\t' + '' + '\t' + '' + '\t' + '' + '\t' + 'Front Camera 1' + '\t' + screenShotFileName + '\n')
+            newSession = True
+            bestScore = 0
 
         cv2.putText(frame, label, (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.4, (0, 0, 255), 3, cv2.LINE_AA)
 
