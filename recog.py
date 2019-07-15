@@ -28,7 +28,7 @@ if __name__ == "__main__":
 
         t = time.time()
         now = datetime.datetime.now()
-        bounding_boxes, scores = detect_face(frame) # add True at the end to get scores
+        bounding_boxes, scores = detect_face(frame)
         time_delta += time.time() - t
         fpsCount = frame_count / time_delta
 
