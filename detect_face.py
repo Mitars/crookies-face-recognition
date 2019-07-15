@@ -23,5 +23,5 @@ def detect_face(frame_temp, in_height=300, in_width=0):
         bounding_boxes.append(cv_rect)
     return bounding_boxes
 
-
+# call the detector
 hogFaceDetector = dlib.get_frontal_face_detector()

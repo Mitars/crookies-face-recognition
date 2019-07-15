@@ -11,7 +11,7 @@ if __name__ == "__main__":
     hasFrame, frame = cap.read()
 
     frame_count = 0
-    tt_dlibHog = 0
+    time_delta = 0
     while True:
         hasFrame, frame = cap.read()
         if not hasFrame:
@@ -19,13 +19,12 @@ if __name__ == "__main__":
         frame_count += 1
 
         t = time.time()
-        bboxes = detect_face(frame)
-        tt_dlibHog += time.time() - t
-        fpsDlibHog = frame_count / tt_dlibHog
-
-        label = "DLIB HoG ; ; FPS : {:.2f}".format(fpsDlibHog)
-
         now = datetime.datetime.now()
+        bboxes = detect_face(frame)
+        time_delta += time.time() - t
+        fpsCount = frame_count / time_delta
+
+        label = "DLIB HoG ; ; FPS : {:.2f}".format(fpsCount)
 
         if len(bboxes) > 0:
             for box in bboxes:
@@ -38,7 +37,7 @@ if __name__ == "__main__":
         cv2.imshow("Face Detection Comparison", frame)
 
         if frame_count == 1:
-            tt_dlibHog = 0
+            time_delta = 0
 
         k = cv2.waitKey(10)
         if k == 27:
