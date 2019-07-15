@@ -20,7 +20,7 @@ if __name__ == "__main__":
 
         t = time.time()
         now = datetime.datetime.now()
-        bounding_boxes, scores = detect_face(frame)
+        bounding_boxes, scores = detect_face(frame) # add True at the end to get scores
         time_delta += time.time() - t
         fpsCount = frame_count / time_delta
 
@@ -28,10 +28,14 @@ if __name__ == "__main__":
 
         for i in range(len(bounding_boxes)):
             box = bounding_boxes[i]
-            logfile.write(str(now) + ', ' + 'unknown' + ', ' + str(box) + ', ' + str(scores[i]) + ', ' + 'Front Camera 1' + '\n')
+            if scores:
+                score = scores[i]
+            else:
+                score = 0
+            logfile.write(str(now) + ', ' + 'unknown' + ', ' + str(box) + ', ' + str(score) + ', ' + 'Front Camera 1' + '\n')
             cv2.rectangle(frame, (box[0], box[1]), (box[2], box[3]), (0, 255, 0), 3, 3)
-            cv2.putText(frame, str("%.2f" % scores[i]), (box[0], box[1]), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 1, cv2.LINE_AA)
-            #print(scores[0])
+            if score > 0:
+                cv2.putText(frame, str("%.2f" % score), (box[0], box[1]), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 1, cv2.LINE_AA)
 
         cv2.putText(frame, label, (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.4, (0, 0, 255), 3, cv2.LINE_AA)
 

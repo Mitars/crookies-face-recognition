@@ -2,19 +2,29 @@ import cv2
 import dlib
 
 
-def detect_face(frame_temp, in_height=300, in_width=0):
-    frame_height = frame_temp.shape[0]
-    frame_width = frame_temp.shape[1]
+def detect_face(frame, use_scores=False):
+    # put this in config later
+    in_height = 300
+    in_width = 0
+
+    frame_height = frame.shape[0]
+    frame_width = frame.shape[1]
     if not in_width:
         in_width = int((frame_width / frame_height) * in_height)
 
     scale_height = frame_height / in_height
     scale_width = frame_width / in_width
 
-    frame_small = cv2.resize(frame_temp, (in_width, in_height))
+    frame_small = cv2.resize(frame, (in_width, in_height))
 
     frame_small = cv2.cvtColor(frame_small, cv2.COLOR_BGR2RGB)
-    face_rects, scores, idx = hogFaceDetector.run(frame_small, 1, 0)
+
+    scores = []
+
+    if use_scores:
+        face_rects, scores, idx = hogFaceDetector.run(frame_small, 1, 0)
+    else:
+        face_rects = hogFaceDetector(frame_small, 0)
 
     bounding_boxes = []
     for faceRect in face_rects:
