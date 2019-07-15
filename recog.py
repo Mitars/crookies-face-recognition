@@ -6,8 +6,8 @@ import datetime
 from detect_face import detect_face
 
 if __name__ == "__main__":
-    logfile = open("log.csv", "w+")
-    logfile.write('time, person, bounding box, detection_score, camera\n')
+    logfile = open("log.xls", "w+")
+    logfile.write('time\t person\t bounding box\t detection_score\t camera\t sceen-shot name\n')
     imagesFolderPath = './camera_'
     cap = cv2.VideoCapture(0)
     hasFrame, frame = cap.read()
@@ -41,10 +41,10 @@ if __name__ == "__main__":
                     screenShotFileName = '%s.jpg' % (str(now).replace(':', '_'))
                     cv2.imwrite("%s/%s.jpg" % (imagesFolderPath, screenShotFileName), frame)
                     makeScreenShot = False
-                    logfile.write(str(now) + ', ' + 'unknown' + ', ' + str(
-                        box) + ', ' + str(scores[i]) + ', ' + 'Front Camera 1' + ', ' + screenShotFileName + '\n')
+                    logfile.write(str(now) + '\t' + 'unknown' + '\t' + str(
+                        box) + '\t' + str(scores[i]) + '\t' + 'Front Camera 1' + '\t' + screenShotFileName + '\n')
                 else:
-                    logfile.write(str(now) + ', ' + 'unknown' + ', ' + str(box) + ', ' + str(scores[i]) + ', ' + 'Front Camera 1' + '\n')
+                    logfile.write(str(now) + '\t' + 'unknown' + '\t' + str(box) + '\t' + str(scores[i]) + '\t' + 'Front Camera 1' + '\n')
                 cv2.rectangle(frame, (box[0], box[1]), (box[2], box[3]), (0, 255, 0), 3, 3)
                 cv2.putText(frame, str("%.2f" % scores[i]), (box[0], box[1]), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 1, cv2.LINE_AA)
                 #print(scores[0])
