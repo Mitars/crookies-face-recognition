@@ -9,6 +9,7 @@ def recognize_face(frame, bounding_box):
     face_descriptor_from_prealigned_image = facerec.compute_face_descriptor(face_chip)
     print(face_descriptor_from_prealigned_image)
 
+
 # call the detector
-sp = dlib.shape_predictor('data/shape_predictor_5_face_landmarks.dat')
-facerec = dlib.face_recognition_model_v1('data/dlib_face_recognition_resnet_model_v1.dat')
+# sp = dlib.shape_predictor('data/shape_predictor_5_face_landmarks.dat')
+# facerec = dlib.face_recognition_model_v1('data/dlib_face_recognition_resnet_model_v1.dat')

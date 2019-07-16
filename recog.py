@@ -8,7 +8,7 @@ import fps_counter
 
 
 def stream_entry(*args):
-    print(args)
+    # print(args)
     logfile.write('\t'.join([str(item) for item in args]) + '\n')
 
 
@@ -33,7 +33,7 @@ if __name__ == '__main__':
             box = bounding_boxes[i]
             score = scores[i]
 
-            #recognize_face(frame, box)
+            # recognize_face(frame, box)
 
             cv2.rectangle(frame, (box[0], box[1]), (box[2], box[3]), (0, 255, 0), 3, 3)
             cv2.putText(frame, str("%.2f" % score), (box[0], box[1]), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 1, cv2.LINE_AA)

@@ -18,14 +18,17 @@ def capture_logic(bounding_boxes, scores, frame, now):
             screenshot_timestamp = str(now).replace(':', '_')
             filename = str(screenshot_timestamp) + '_newperson.jpg'
             cv2.imwrite(image_path + '/' + filename, frame)
+            bestScore = np.mean(scores) if any(scores) else 0
         elif np.mean(scores) > bestScore:
-            filename = str(screenshot_timestamp) + '_best.jpg'
+            filename = str(screenshot_timestamp) + '_best_.jpg'
+            print(str(bestScore) + ' -> ' + str(np.mean(scores)))
             cv2.imwrite(image_path + '/' + filename, frame)
+            bestScore = np.mean(scores) if any(scores) else 0
     elif new_session:
         filename = screenshot_timestamp + '_empty.jpg'
         cv2.imwrite(image_path + '/' + filename, frame)
+        bestScore = np.mean(scores) if any(scores) else 0
 
-    bestScore = np.mean(scores) if any(scores) else 0
     previous_detection_count = len(bounding_boxes)
 
     return filename
