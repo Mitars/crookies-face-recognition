@@ -1,10 +1,8 @@
 from __future__ import division
 import cv2
 import datetime
-from detect_face import detect_face
-from recognize_face import recognize_face
-import image_capture as cpt
-import fps_counter
+from face_recognition_system.detect_face import detect_face
+from face_recognition_system import image_capture as cpt, fps_counter
 
 
 def stream_entry(*args):
