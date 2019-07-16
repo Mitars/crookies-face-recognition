@@ -2,13 +2,12 @@ from __future__ import division
 import cv2
 import datetime
 from detect_face import detect_face
-from recognize_face import recognize_face
 import image_capture as cpt
-import fps_counter
+import recognize_face
 
 
 def stream_entry(*args):
-    print(args)
+    # print(args)
     logfile.write('\t'.join([str(item) for item in args]) + '\n')
 
 
@@ -17,6 +16,10 @@ if __name__ == '__main__':
     stream_entry('time', 'person', 'bounding box', 'detection_score', 'camera', 'screenshot name')
     cap = cv2.VideoCapture(0)
     cpt.initialize_capture()
+
+    counter = 0
+    #confidence = 0
+    #face = ''
 
     while True:
         hasFrame, frame = cap.read()
@@ -28,6 +31,8 @@ if __name__ == '__main__':
         bounding_boxes, scores = detect_face(frame)
 
         screenshot_filename = cpt.capture_logic(bounding_boxes, scores, frame, frame_start)
+
+        counter += 1
 
         for i in range(len(bounding_boxes)):
             box = bounding_boxes[i]
@@ -49,19 +54,22 @@ if __name__ == '__main__':
             scale_width = frame_width / in_width
             frame_small = cv2.resize(crop_img, (in_width, 100))
 
-            if counter % 30 == 0:
-                face, confidence = recognize_face.compare_with_all(frame_small)
+            #if counter % 30 == 0:
+            face, confidence = recognize_face.compare_with_all(frame_small)
 
             cv2.rectangle(frame, (box[0], box[1]), (box[2], box[3]), (0, 255, 0), 3, 3)
-            cv2.putText(frame, str("%.2f" % score), (box[0], box[1]), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 1, cv2.LINE_AA)
+            cv2.putText(frame, str(face) + ': ' + str("%.2f" % (confidence * 100) + '%'), (box[0], box[1] - 30),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 1, cv2.LINE_AA)
+            cv2.putText(frame, 'Human: ' + str("%.2f" % (score * 40)) + '%', (box[0], box[1] - 6),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 1, cv2.LINE_AA)
 
             stream_entry(frame_start, 'unknown', box, score, 'Front Camera 1', screenshot_filename)
 
         if not any(bounding_boxes):
             stream_entry(frame_start, None, None, None, 'Front Camera 1', screenshot_filename)
 
-        fps_count = fps_counter.get_fps(datetime.datetime.now(), frame_start)
-        label = 'DLIB HoG ; ; FPS : {:.2f}'.format(fps_count)
+        fps_count = 1 / ((datetime.datetime.now() - frame_start).microseconds / (1000 * 1000))
+        label = 'DLIB HoG; FPS: {:.2f}'.format(fps_count)
         cv2.putText(frame, label, (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.4, (0, 0, 255), 3, cv2.LINE_AA)
 
         cv2.imshow("Face Detection Comparison", frame)
