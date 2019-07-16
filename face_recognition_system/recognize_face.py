@@ -35,7 +35,7 @@ def compare_with_all(frame):
     new_shape = sp(frame, dlib.rectangle(0, 0, width, height))
     new_face = facerec.compute_face_descriptor(frame, new_shape)
 
-    best_match_distance = 0.5
+    best_match_distance = 0.4
     name = 'Unknown'
     for i in range(len(faces)):
         distance = euclidean_dist(new_face, faces[i])

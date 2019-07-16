@@ -21,7 +21,6 @@ def capture_logic(bounding_boxes, scores, frame, now):
             bestScore = np.mean(scores) if any(scores) else 0
         elif np.mean(scores) > bestScore:
             filename = str(screenshot_timestamp) + '_best_.jpg'
-            print(str(bestScore) + ' -> ' + str(np.mean(scores)))
             cv2.imwrite(image_path + '/' + filename, frame)
             bestScore = np.mean(scores) if any(scores) else 0
     elif new_session:
