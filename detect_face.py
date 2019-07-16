@@ -21,12 +21,15 @@ def detect_face(frame):
 
     face_rects, scores, idx = hogFaceDetector.run(frame_small, 0, 0)
 
+    print(scores)
+
     bounding_boxes = []
     for faceRect in face_rects:
         cv_rect = [int(faceRect.left()*scale_width), int(faceRect.top()*scale_height),
                    int(faceRect.right()*scale_width), int(faceRect.bottom()*scale_height)]
         bounding_boxes.append(cv_rect)
     return bounding_boxes, scores
+
 
 # call the detector
 hogFaceDetector = dlib.get_frontal_face_detector()
