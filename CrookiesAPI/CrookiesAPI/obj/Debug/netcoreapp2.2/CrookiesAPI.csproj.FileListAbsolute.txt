@@ -1,0 +1,14 @@
+C:\Users\pdagwal\source\repos\CrookiesAPI\CrookiesAPI\bin\Debug\netcoreapp2.2\CrookiesAPI.deps.json
+C:\Users\pdagwal\source\repos\CrookiesAPI\CrookiesAPI\bin\Debug\netcoreapp2.2\CrookiesAPI.runtimeconfig.json
+C:\Users\pdagwal\source\repos\CrookiesAPI\CrookiesAPI\bin\Debug\netcoreapp2.2\CrookiesAPI.runtimeconfig.dev.json
+C:\Users\pdagwal\source\repos\CrookiesAPI\CrookiesAPI\bin\Debug\netcoreapp2.2\CrookiesAPI.dll
+C:\Users\pdagwal\source\repos\CrookiesAPI\CrookiesAPI\obj\Debug\netcoreapp2.2\CrookiesAPI.csprojAssemblyReference.cache
+C:\Users\pdagwal\source\repos\CrookiesAPI\CrookiesAPI\obj\Debug\netcoreapp2.2\CrookiesAPI.csproj.CoreCompileInputs.cache
+C:\Users\pdagwal\source\repos\CrookiesAPI\CrookiesAPI\obj\Debug\netcoreapp2.2\CrookiesAPI.RazorAssemblyInfo.cache
+C:\Users\pdagwal\source\repos\CrookiesAPI\CrookiesAPI\obj\Debug\netcoreapp2.2\CrookiesAPI.RazorAssemblyInfo.cs
+C:\Users\pdagwal\source\repos\CrookiesAPI\CrookiesAPI\obj\Debug\netcoreapp2.2\CrookiesAPI.AssemblyInfoInputs.cache
+C:\Users\pdagwal\source\repos\CrookiesAPI\CrookiesAPI\obj\Debug\netcoreapp2.2\CrookiesAPI.AssemblyInfo.cs
+C:\Users\pdagwal\source\repos\CrookiesAPI\CrookiesAPI\obj\Debug\netcoreapp2.2\CrookiesAPI.RazorTargetAssemblyInfo.cache
+C:\Users\pdagwal\source\repos\CrookiesAPI\CrookiesAPI\bin\Debug\netcoreapp2.2\CrookiesAPI.pdb
+C:\Users\pdagwal\source\repos\CrookiesAPI\CrookiesAPI\obj\Debug\netcoreapp2.2\CrookiesAPI.dll
+C:\Users\pdagwal\source\repos\CrookiesAPI\CrookiesAPI\obj\Debug\netcoreapp2.2\CrookiesAPI.pdb

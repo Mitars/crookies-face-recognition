@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SparkthonModelStoreContainer" CdmEntityContainer="SparkthonEntities1">
+    <EntitySetMapping Name="Crookie">
+      <EntityTypeMapping TypeName="SparkthonModel.Crookie">
+        <MappingFragment StoreEntitySet="Crookie">
+          <ScalarProperty Name="DetectionScore" ColumnName="DetectionScore" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="X" ColumnName="X" />
+          <ScalarProperty Name="Y" ColumnName="Y" />
+          <ScalarProperty Name="X2" ColumnName="X2" />
+          <ScalarProperty Name="Y2" ColumnName="Y2" />
+          <ScalarProperty Name="TimeIn" ColumnName="TimeIn" />
+          <ScalarProperty Name="TimeOut" ColumnName="TimeOut" />
+          <ScalarProperty Name="Camera" ColumnName="Camera" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

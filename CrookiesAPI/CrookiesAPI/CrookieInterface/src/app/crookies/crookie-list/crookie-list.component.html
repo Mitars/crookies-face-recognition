@@ -1,0 +1,24 @@
+<table matSort (matSortChange)="sortData($event)" class="table table-hover" border="1" align="center">
+    <tr style="background-color: gray">
+            <th mat-sort-header="Name">Name</th>
+            <th>X</th>
+            <th>Y</th>
+            <th>X2</th>
+            <th>Y2</th>
+            <th>TimeIn</th>
+            <th>TimeOut</th>
+            <th>Confidence</th>
+            <th>Camera</th>
+    </tr>
+    <tr *ngFor="let cki of service.list">
+        <td>{{cki.Name}}</td>
+        <td>{{cki.X}}</td>
+        <td>{{cki.Y}}</td>
+        <td>{{cki.X2}}</td>
+        <td>{{cki.Y2}}</td>
+        <td>{{cki.TimeIn}}</td>
+        <td style="width: fit-content;word-wrap: unset">{{cki.TimeOut}}</td>
+        <td>{{cki.DetectionScore*100}}</td>
+        <td>{{cki.Camera}}</td>
+    </tr>
+</table>
