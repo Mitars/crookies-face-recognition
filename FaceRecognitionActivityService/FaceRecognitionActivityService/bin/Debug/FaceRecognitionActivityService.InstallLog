@@ -1,0 +1,26 @@
+﻿Installing assembly 'C:\Users\pdagwal\source\repos\FaceRecognitionActivityService\FaceRecognitionActivityService\bin\Debug\FaceRecognitionActivityService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = C:\Users\pdagwal\source\repos\FaceRecognitionActivityService\FaceRecognitionActivityService\bin\Debug\FaceRecognitionActivityService.exe
+   logfile = C:\Users\pdagwal\source\repos\FaceRecognitionActivityService\FaceRecognitionActivityService\bin\Debug\FaceRecognitionActivityService.InstallLog
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\pdagwal\source\repos\FaceRecognitionActivityService\FaceRecognitionActivityService\bin\Debug\FaceRecognitionActivityService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = C:\Users\pdagwal\source\repos\FaceRecognitionActivityService\FaceRecognitionActivityService\bin\Debug\FaceRecognitionActivityService.exe
+   logfile = C:\Users\pdagwal\source\repos\FaceRecognitionActivityService\FaceRecognitionActivityService\bin\Debug\FaceRecognitionActivityService.InstallLog
+Installing assembly 'C:\Users\pdagwal\source\repos\FaceRecognitionActivityService\FaceRecognitionActivityService\bin\Debug\FaceRecognitionActivityService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = C:\Users\pdagwal\source\repos\FaceRecognitionActivityService\FaceRecognitionActivityService\bin\Debug\FaceRecognitionActivityService.exe
+   logfile = C:\Users\pdagwal\source\repos\FaceRecognitionActivityService\FaceRecognitionActivityService\bin\Debug\FaceRecognitionActivityService.InstallLog
+Installing service Service1...
+Creating EventLog source Service1 in log Application...
+Rolling back assembly 'C:\Users\pdagwal\source\repos\FaceRecognitionActivityService\FaceRecognitionActivityService\bin\Debug\FaceRecognitionActivityService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = C:\Users\pdagwal\source\repos\FaceRecognitionActivityService\FaceRecognitionActivityService\bin\Debug\FaceRecognitionActivityService.exe
+   logfile = C:\Users\pdagwal\source\repos\FaceRecognitionActivityService\FaceRecognitionActivityService\bin\Debug\FaceRecognitionActivityService.InstallLog
+Restoring event log to previous state for source Service1.
